@@ -8,12 +8,14 @@ import NotesListPage from "./pages/NotesListPage";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="container dark">
+        <div className="app">
         <Headers />
         <Routes>
           <Route path="/" exact element={<NotesListPage />} />
           <Route path="/note/:id" exact element={<NotePage />} />
         </Routes>
+        </div>
       </div>
     </Router>
   );
