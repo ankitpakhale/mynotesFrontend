@@ -5,11 +5,11 @@ import { ReactComponent as ArrowLeft } from "../assets/arrow-left.svg";
 const NotePage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  console.info(id, "THis is ID");
   const [note, setNote] = useState(null);
 
   const getNote = async () => {
     if (id === "new") return;
-
     let response = await fetch(`/api/notes/${id}/`);
     let data = await response.json();
     setNote(data);
@@ -20,7 +20,7 @@ const NotePage = () => {
   }, [id]);
 
   const updateNote = async () => {
-    fetch(`/api/notes/${note.id}/update/`, {
+    fetch(`/api/notes/${note.id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const NotePage = () => {
   };
 
   const createNote = async () => {
-    fetch("/api/posts/create/", {
+    fetch("/api/notes/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const NotePage = () => {
   };
 
   const deleteNote = async () => {
-    fetch(`/api/notes/${note.id}/delete/`, {
+    fetch(`/api/notes/${note.id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

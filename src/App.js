@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import Headers from "./components/Headers";
@@ -10,11 +10,11 @@ function App() {
     <Router>
       <div className="container dark">
         <div className="app">
-        <Headers />
-        <Routes>
-          <Route path="/" exact element={<NotesListPage />} />
-          <Route path="/note/:id" exact element={<NotePage />} />
-        </Routes>
+          <Headers />
+          <Routes>
+            <Route path="/" exact element={<NotesListPage />} />
+            <Route path="/note/:id" exact element={<NotePage />} />
+          </Routes>
         </div>
       </div>
     </Router>
