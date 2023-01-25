@@ -33,7 +33,7 @@ const NotePage = () => {
 
   const addNote = async () => {
     if (note) {
-      fetch("/api/post/", {
+      fetch("/api/posts/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,14 +46,6 @@ const NotePage = () => {
     console.info("Please add something to notes");
   };
 
-  const handleSubmit = () => {
-    if (id !== "new") {
-      console.info("new note updated successfully");
-      updateNote();
-    }
-    navigate("/");
-  };
-
   const deleteNote = async () => {
     fetch(`/api/notes/${note.id}/delete/`, {
       method: "DELETE",
@@ -62,6 +54,15 @@ const NotePage = () => {
       },
     });
     console.info("data deleted successfully");
+    navigate("/");
+  };
+
+  const handleSubmit = () => {
+    if (id !== "new" && !note.body) {
+      deleteNote();
+    } else if (id !== "new") {
+      updateNote();
+    }
     navigate("/");
   };
 
@@ -78,7 +79,7 @@ const NotePage = () => {
           <button onClick={() => addNote()}>Done</button>
         )}
       </div>
-      <button onClick={() => console.info(note)}>Show data</button>
+      <button onClick={() => console.info(note.body)}>Show data</button>
       <textarea
         onChange={(e) => setNote({ ...note, body: e.target.value })}
         defaultValue={note?.body}
