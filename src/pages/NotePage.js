@@ -75,7 +75,6 @@ const NotePage = () => {
           <button onClick={() => deleteNote()}>Delete</button>
         )}
       </div>
-      <button onClick={() => console.info(note.body)}>Show data</button>
       <textarea
         onChange={(e) => setNote({ ...note, body: e.target.value })}
         value={note?.body}
