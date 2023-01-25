@@ -4,7 +4,6 @@ import { ReactComponent as ArrowLeft } from "../assets/arrow-left.svg";
 
 const NotePage = () => {
   const navigate = useNavigate();
-
   const { id } = useParams();
   const [note, setNote] = useState(null);
 
@@ -13,7 +12,6 @@ const NotePage = () => {
 
     let response = await fetch(`/api/notes/${id}/`);
     let data = await response.json();
-    console.info(data, "this is data");
     setNote(data);
   };
 
@@ -55,14 +53,13 @@ const NotePage = () => {
   };
 
   const handleSubmit = () => {
-    if (id !== "new" && note.body === '') {
+    if (id !== "new" && note.body === "") {
       deleteNote();
     } else if (id !== "new") {
       updateNote();
     } else if (id === "new" && note !== null) {
       createNote();
     }
-
     navigate("/");
   };
 
@@ -72,7 +69,11 @@ const NotePage = () => {
         <h3>
           <ArrowLeft onClick={() => handleSubmit()} />
         </h3>
-        <button onClick={() => handleSubmit()}>Done</button>
+        {id === "new" ? (
+          <button onClick={() => handleSubmit()}>Done</button>
+        ) : (
+          <button onClick={() => deleteNote()}>Delete</button>
+        )}
       </div>
       <button onClick={() => console.info(note.body)}>Show data</button>
       <textarea
